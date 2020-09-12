@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+		<meta name="description" content="Rubik’s Cube">
+		<meta name="keywords" content="Erno Rubik’s Cube">
+
+		<link rel="stylesheet" type="text/css" href="build/styles/cube.css">
+		<link rel="stylesheet" type="text/css" href="examples/basic/styles/base.css">
+		<link rel="icon" type="image/png" href="build/media/cuber-favicon-0064x0064.png">
+		<link rel="apple-touch-icon" href="build/media/cuber-favicon-0144x0144.png">
+
+		<link rel="stylesheet" type="text/css" href="slider.css">
+		<script src="slider.js"></script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+		
+	
+	
+
+		<title>Cuber</title>
+
+
+
+		<!-- compiled cube code -->	
+		<!-- <script charset="utf-8" src="build/cuber.js"></script> -->
+
+		<!-- compiled & minified cube code -->	
+		<!-- <script charset="utf-8" src="build/cuber.min.js"></script> -->
+
+
+
+		<script charset="utf-8" src="src/scripts/vendor/tween.min.js"></script>
+
+
+		<!-- cube source code -->
+
+
+			<!--  Three.js  -->
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/Three.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/core/EventDispatcher.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Math.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Quaternion.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Vector2.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Vector3.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Box3.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Sphere.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Euler.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Matrix3.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Matrix4.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/core/Object3D.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/cameras/Camera.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/cameras/PerspectiveCamera.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Ray.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Plane.js"></script>
+
+
+			<!--  Here are the Cube guts. Enjoy.  -->
+			<script charset="utf-8" src="src/scripts/ERNO.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/CSS3DRenderer.js"></script>
+			<script charset="utf-8" src="src/scripts/utils/utils.js"></script>
+			<script charset="utf-8" src="src/scripts/utils/Number.js"></script>
+			<script charset="utf-8" src="src/scripts/utils/String.js"></script>
+			<script charset="utf-8" src="src/scripts/utils/Array.js"></script>
+			<script charset="utf-8" src="src/scripts/colors.js"></script>
+			<script charset="utf-8" src="src/scripts/directions.js"></script>
+			<script charset="utf-8" src="src/scripts/queues.js"></script>
+			<script charset="utf-8" src="src/scripts/twists.js"></script>
+			<script charset="utf-8" src="src/scripts/cubelets.js"></script>
+			<script charset="utf-8" src="src/scripts/groups.js"></script>
+			<script charset="utf-8" src="src/scripts/slices.js"></script>
+			<script charset="utf-8" src="src/scripts/folds.js"></script>
+			<script charset="utf-8" src="src/scripts/projector.js"></script>
+			<script charset="utf-8" src="src/scripts/interaction.js"></script>
+			<script charset="utf-8" src="src/scripts/controls.js"></script>
+			<script charset="utf-8" src="src/scripts/cubes.js"></script>
+			<script charset="utf-8" src="src/scripts/solvers.js"></script>
+			<script charset="utf-8" src="src/scripts/renderer.js"></script>
+
+
+
+		<!-- implementation -->	
+
+
+		<script charset="utf-8" src="examples/basic/scripts/jquery.js"></script>
+		<script charset="utf-8" src="src/scripts/extras/renderers/iecss3d.js"></script>
+		<script charset="utf-8" src="src/scripts/extras/renderers/ierenderer.js"></script>
+		<script charset="utf-8" src="src/scripts/extras/controls/locked.js"></script>
+		<script charset="utf-8" src="src/scripts/extras/deviceMotion.js"></script>
+		<script charset="utf-8" src="examples/basic/scripts/main.js"></script>		
+
+
+
+		
+	</head>
+	<body class="graydient" >
+
+<!--		<div class="sidenav " id="mySidenav">
+			<span class="closebtn" onclick="closeNav()">&times;</span>
+			 <a href="easy.html">Home</a>
+			 <a href="user_solve.html">User solve</a>
+		     
+			
+		 </div>
+			 <span class="icon"  onclick="openNav()">&#9776;</span>
+
+
+
+
+			 <div class="infoNav" id="myInfoNav">
+				<span class="closeInfo" onclick="closeInfoNav()">&times;</span>
+				 <h1>CONTROLS!</h1>
+				 <h2> Mouse Controls</h2>
+				 <p>Double click and hold any portion of the cube and its surrounding area to interact. Moving the cursor while holding the click outside the cube will allow you to view the Rubix cube from different angles. </p>
+				 <h2> Keyboard Controls</h2>
+<pre>
+  NOTATION
+
+  UPPERCASE = Clockwise to next 90 degree peg
+  lowercase = Anticlockwise to next 90 degree peg
+		
+  FACE & SLICE ROTATION COMMANDS
+	
+  F Front
+  S Standing (rotate acc. to Front Face's orientation)
+  B Back	
+  L Left
+  M Middle (rotate acc. to Left Face's orientation)
+  R Right	
+  U Up
+  E Equator (rotate acc. to Up Face's orientation)
+  D Down
+	
+  ENTIRE CUBE ROTATION COMMANDS
+	
+  X Rotate entire cube acc. to Right Face's orientation
+  Y Rotate entire cube acc. to Up Face's orientation
+  Z Rotate entire cube acc. to Front Face's orientation
+	
+</pre>
+			 </div>
+				 <button class="help"  onclick="openInfoNav()">?</button>
+			
+
+
+-->
+		   
+		<section id="rubiks">
+		<div class="title">
+			<h1>Rubik’s Cube Simulator</h1>
+		</div>
+		
+		
+
+<!--RUBIKS CUBE IS INSIDE THIS CONTAINER-->
+		<div id="container"></div>
+		<div class="buttons">		
+		<button type="button" id="challenge" onclick="openNav()" class="btn btn-primary">TAKE THE CHALLENGE!</button>
+	</div>
+
+	<div id="myNav" class="overlay">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div class="overlay-content">
+
+			
+             
+
+			<div class="infoNav" id="myInfoNav">
+			   <span class="closeInfo" onclick="closeInfoNav()">&times;</span>
+				
+				
+<pre>
+
+
+<h2> Difficulty Levels</h2>
+
+ EASY
+ -Cube will be scrambled only 3 times.
+ -Undo Redo Option Available.
+
+ MEDIUM
+ -Cube will be scrambled only 5 times.
+ -Undo Redo Option Available.
+
+ HARD
+ -Cube will be scrambled 7 times.
+ -Undo Redo Option Available.
+
+ LEGENDARY
+ -Cube will be scrambled 10 times.
+ -Undo Redo Option Not Available.
+</pre>
+			</div>
+				<button class="help"  onclick="openInfoNav()">?</button>
+
+
+			<div class="title">
+				<h3>Choose difficulty</h3>
+			</div>
+
+			<div class="buttons">		
+				<button type="button" id="easy" onclick="easy()" class="btn btn-info">Easy</button>
+				<button type="button" id="medium" onclick="medium()" class="btn btn-primary">Medium</button>
+				<button type="button" id="hard" onclick="hard()" class="btn btn-danger">Hard</button>
+				<button type="button" id="legendary" onclick="legendary()" class="btn btn-dark">Legendary</button>
+			</div>
+		</div>
+	  </div>
+
+
+	
+
+	</section>
+
+
+	
+
+	
+	
+
+		
+	<script>
+
+function openNav() {
+  document.getElementById("myNav").style.display = "block";
+}
+
+function closeNav() {
+  document.getElementById("myNav").style.display = "none";
+}
+
+
+	document.getElementById("easy").onclick = function () {
+        location.href = "easy.html";
+  };
+
+  document.getElementById("medium").onclick = function () {
+        location.href = "medium.html";
+  };
+
+  document.getElementById("hard").onclick = function () {
+        location.href = "hard.html";
+  };
+
+  document.getElementById("legendary").onclick = function () {
+        location.href = "legendary.html";
+  };
+		
+var mySlider = slider('.slides');
+
+
+
+function openInfoNav(){
+    document.getElementById("myInfoNav").style.width="25em";
+}
+function closeInfoNav(){
+    document.getElementById("myInfoNav").style.width="0";
+}
+	  </script>	
+	</body>
+</html>

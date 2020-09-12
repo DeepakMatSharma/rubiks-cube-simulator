@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+		<meta name="description" content="Rubik’s Cube">
+		<meta name="keywords" content="Erno Rubik’s Cube">
+
+
+	
+
+
+
+		<link rel="stylesheet" type="text/css" href="build/styles/cube.css">
+		<link rel="stylesheet" type="text/css" href="difficulty.css">
+		<link rel="icon" type="image/png" href="build/media/cuber-favicon-0064x0064.png">
+		<link rel="apple-touch-icon" href="build/media/cuber-favicon-0144x0144.png">
+
+		<link rel="stylesheet" type="text/css" href="slider.css">
+		<script src="slider.js"></script>
+    
+
+		<title>Cuber</title>
+
+
+
+		<!-- compiled cube code -->	
+		<!-- <script charset="utf-8" src="build/cuber.js"></script> -->
+
+		<!-- compiled & minified cube code -->	
+		<!-- <script charset="utf-8" src="build/cuber.min.js"></script> -->
+
+
+
+		<script charset="utf-8" src="src/scripts/vendor/tween.min.js"></script>
+
+
+		<!-- cube source code -->
+
+
+			<!--  Three.js  -->
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/Three.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/core/EventDispatcher.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Math.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Quaternion.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Vector2.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Vector3.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Box3.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Sphere.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Euler.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Matrix3.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Matrix4.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/core/Object3D.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/cameras/Camera.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/cameras/PerspectiveCamera.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Ray.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/threejs/src/math/Plane.js"></script>
+
+
+			<!--  Here are the Cube guts. Enjoy.  -->
+			<script charset="utf-8" src="src/scripts/ERNO.js"></script>
+			<script charset="utf-8" src="src/scripts/vendor/CSS3DRenderer.js"></script>
+			<script charset="utf-8" src="src/scripts/utils/utils.js"></script>
+			<script charset="utf-8" src="src/scripts/utils/Number.js"></script>
+			<script charset="utf-8" src="src/scripts/utils/String.js"></script>
+			<script charset="utf-8" src="src/scripts/utils/Array.js"></script>
+			<script charset="utf-8" src="src/scripts/colors.js"></script>
+			<script charset="utf-8" src="src/scripts/directions.js"></script>
+			<script charset="utf-8" src="src/scripts/queues.js"></script>
+			<script charset="utf-8" src="src/scripts/twists.js"></script>
+			<script charset="utf-8" src="src/scripts/cubelets.js"></script>
+			<script charset="utf-8" src="src/scripts/groups.js"></script>
+			<script charset="utf-8" src="src/scripts/slices.js"></script>
+			<script charset="utf-8" src="src/scripts/folds.js"></script>
+			<script charset="utf-8" src="src/scripts/projector.js"></script>
+			<script charset="utf-8" src="src/scripts/interaction.js"></script>
+			<script charset="utf-8" src="src/scripts/controls.js"></script>
+			<script charset="utf-8" src="src/scripts/cubes.js"></script>
+			<script charset="utf-8" src="src/scripts/solvers.js"></script>
+			<script charset="utf-8" src="src/scripts/renderer.js"></script>
+
+
+
+		<!-- implementation -->	
+
+
+		<script charset="utf-8" src="examples/basic/scripts/jquery.js"></script>
+		<script charset="utf-8" src="src/scripts/extras/renderers/iecss3d.js"></script>
+		<script charset="utf-8" src="src/scripts/extras/renderers/ierenderer.js"></script>
+		<script charset="utf-8" src="src/scripts/extras/controls/locked.js"></script>
+		<script charset="utf-8" src="src/scripts/extras/deviceMotion.js"></script>
+		<script charset="utf-8" src="examples/basic/scripts/main.js"></script>		
+
+
+
+		
+	</head>
+	<body class="graydient" onload="shuffle()">
+
+		<div class="sidenav " id="mySidenav">
+			<span class="closebtn" onclick="closeNav()">&times;</span>
+            <a class="" href="easy.html">Easy</a>
+			<a href="medium.html">Medium</a>
+			<a href="hard.html">Hard</a>
+			<a href="legendary.html">Legendary</a>
+		 </div>
+             <button class="choose"  onclick="openNav()">EASY</span>
+             
+
+             <div class="infoNav" id="myInfoNav">
+				<span class="closeInfo" onclick="closeInfoNav()">&times;</span>
+				 <h1>CONTROLS!</h1>
+				 <h2> Mouse Controls</h2>
+				 <p>Double click and hold any portion of the cube and its surrounding area to interact. Moving the cursor while holding the click outside the cube will allow you to view the Rubix cube from different angles. </p>
+				 <h2> Keyboard Controls</h2>
+<pre>
+  NOTATION
+
+  UPPERCASE = Clockwise to next 90 degree peg
+  lowercase = Anticlockwise to next 90 degree peg
+		
+  FACE & SLICE ROTATION COMMANDS
+	
+  F Front
+  S Standing (rotate acc. to Front Face's orientation)
+  B Back	
+  L Left
+  M Middle (rotate acc. to Left Face's orientation)
+  R Right	
+  U Up
+  E Equator (rotate acc. to Up Face's orientation)
+  D Down
+	
+  ENTIRE CUBE ROTATION COMMANDS
+	
+  X Rotate entire cube acc. to Right Face's orientation
+  Y Rotate entire cube acc. to Up Face's orientation
+  Z Rotate entire cube acc. to Front Face's orientation
+	
+</pre>
+			 </div>
+				 <button class="help"  onclick="openInfoNav()">?</button>
+
+
+
+	
+	<div class="user_solve">	
+<div class="title">
+    <h2>Rubik’s Cube Simulator</h2>
+</div>
+
+<div class="timer"><span class="time" id="time">0</span> seconds</div>
+<!--RUBIKS CUBE IS INSIDE THIS CONTAINER-->
+        <div id="container"> </div>
+      <div class="buttons">
+		<button onclick="start()">START</button>
+        <button id="demo1" onclick="document.getElementById('demo').innerHTML=cube.undo()">UNDO</button>
+        <button id="demo2" onclick="document.getElementById('demo').innerHTML=cube.redo()">RE-DO</button>
+      <!--  <button id="demo3" onclick="document.getElementById('demo').innerHTML=cube.shuffle(10)">AUTO SHUFFLE</button>  -->
+      <!--  <button id="demo4" onclick="undoToZero()">SOLVE</button>   -->
+		<button onclick="myFunction()">SUBMIT</button>
+
+		
+	 <!--	<button onclick="stop()">STOP</button>   
+		    <button onclick="reset()">RESET</button>   -->
+		
+
+	
+      </div>
+		
+
+	
+
+
+	
+    </div>
+		
+	<script>
+
+function shuffle(){
+	cube.shuffle(3);
+}
+
+		
+
+
+var timeElapsed = 0;
+            var timerID = -1;
+            function tick() {
+                timeElapsed++
+                document.getElementById("time").innerHTML = timeElapsed;
+            }
+
+            function start() {
+                if(timerID == -1){
+                    timerID = setInterval(tick, 1000);
+                }
+            }
+
+            function stop() {
+                if(timerID != -1){
+                    clearInterval(timerID)
+                    timerID = -1
+                }
+            }
+
+			function reset() {
+                stop();
+                timeElapsed = -1;
+                tick()
+            }
+
+
+
+			function undoToZero(){
+
+//shuffle().turnOff()
+cube.taskQueue.add( function(){
+
+cube.twistQueue.future = []
+cube.twistDuration = 50
+})
+if( cube.isSolved() === false ){
+
+twistHistoryLength = cube.twistQueue.history.length
+while( twistHistoryLength -- ){
+
+	//  OMFG this is dirty. but solves a subtle logical flaw.
+	//  Can’t use cube.undo() here because undo() would be 
+	//  adding to the taskQueue AFTER shit below is being 
+	//  added to the taskQueue. 
+	//  That means it would set .future = [] BEFORE we actually call undo()!!!
+	//cube.taskQueue.add( function(){ cube.undo() })
+	
+	var wasOk = false
+
+	cube.taskQueue.add( function(){
+
+		if( cube.twistQueue.history.length ){
+		
+			var move = cube.twistQueue.history.pop()
+
+			cube.twistQueue.future = []//  We might have shit queued up.
+			cube.twistQueue.add( move.getInverse())
+			wasOk = true
+		}
+
+	}, function(){
+
+		if( wasOk ) cube.twistQueue.history.pop()
+	})
+}
+}
+
+
+//  Finally, make sure to reset the twistDuration,
+//  and make damn sure the queues are empty!
+
+cube.taskQueue.add( function(){
+
+cube.twistDuration = ERNO.Cube.prototype.twistDuration
+cube.twistQueue.history = []
+cube.historyQueue.history = []// WTF is this?!?!? Seems redundant and black magic!
+})
+}
+
+
+
+
+function myFunction() {
+	if(timerID != -1){
+                    clearInterval(timerID)
+                    timerID = -1
+                }
+  
+  if(cube.isSolved() == true){
+            window.alert('Congratulations!');
+    } else { 
+        window.alert('Sorry, you could not solve it this time.');
+  }
+}
+
+
+
+
+
+
+		
+		var mySlider = slider('.slides');
+		function openNav(){
+    document.getElementById("mySidenav").style.width="15em";
+}
+function closeNav(){
+    document.getElementById("mySidenav").style.width="0";
+}
+
+function openInfoNav(){
+    document.getElementById("myInfoNav").style.width="25em";
+}
+function closeInfoNav(){
+    document.getElementById("myInfoNav").style.width="0";
+}
+	  </script>	
+	</body>
+</html>
